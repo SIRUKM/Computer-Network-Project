@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  frontend:
+    build:
+      context: ./frontend # Path to the frontend application directory
+      dockerfile: Dockerfile # Dockerfile for the frontend
+    ports:
+      - "5173:5173" # Map port 3000 on host to port 3000 on container
+    depends_on:
+      - backend # Ensure backend service is started before frontend
+    networks:
+      - mernNet
+
+  backend:
+    build:
+      context: ./backend # Path to the backend application directory
+      dockerfile: Dockerfile # Dockerfile for the backend
+    ports:
+      - "3000:3000"
+    networks:
+      - mernNet
+
+networks:
+  mernNet: {}        
